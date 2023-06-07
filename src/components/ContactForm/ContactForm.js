@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
 import { selectContacts } from 'Redux/selectors';
 import { addContact } from '../../Redux/operations';
+import { toast } from 'react-toastify';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
@@ -21,8 +22,8 @@ export const ContactForm = () => {
         ({ name }) => name.toLocaleLowerCase().trim() === uniqueName
       )
     ) {
-      alert(
-        `Please enter another name. ${name} is already exists in your contacts`
+      toast.warn(
+        `Please enter another name. ${name} is already exists in your contacts `
       );
       return;
     }
@@ -31,17 +32,22 @@ export const ContactForm = () => {
         ({ phone }) => phone.toLocaleLowerCase().trim() === uniqueNumber
       )
     ) {
-      alert(
-        `Please enter another number. ${phone} is already exists in your contacts`
+      toast.warn(
+        `Please enter another number. ${phone} is already exists in your contacts `
       );
       return;
     }
     const id = nanoid();
     // const newContact = { name, phone, id };
     // addContact(newContact);
-    dispatch(addContact({ name, phone, id }));
-    setName('');
-    setPhone('');
+    dispatch(addContact({ name, phone, id })).then(result => {
+      if (result.meta.requestStatus === 'fulfilled') {
+        setName('');
+        setPhone('');
+        return;
+      }
+      toast.error(`Something went wrong. Сontact ${name} was not added`);
+    });
   };
 
   return (
@@ -49,8 +55,10 @@ export const ContactForm = () => {
       onSubmit={onSubmit}
       style={{
         border: '0.1rem solid black',
-        width: '50%',
-        padding: '0.8rem',
+        borderRadius: '0.5rem',
+        marginTop: '0.5rem',
+        maxWidth: '320px',
+        padding: '1rem',
       }}
     >
       <label
@@ -58,12 +66,12 @@ export const ContactForm = () => {
       >
         Name
         <input
-          style={{ width: '40%' }}
+          style={{ maxWidth: '70%' }}
           type="text"
           name="name"
           value={name}
           onChange={e => setName(e.target.value)}
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          // pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
         />
@@ -72,23 +80,23 @@ export const ContactForm = () => {
         style={{
           display: 'flex',
           flexDirection: 'column',
-          marginTop: '1.5rem',
+          marginTop: '1rem',
           gap: '0.5rem',
         }}
       >
         Number
         <input
-          style={{ width: '40%' }}
+          style={{ maxWidth: '70%' }}
           type="tel"
           name="phone"
           value={phone}
           onChange={e => setPhone(e.target.value)}
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+          // pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
         />
       </label>
-      <button type="submit" style={{ marginTop: '1.5rem' }}>
+      <button type="submit" style={{ padding: '0.5rem', marginTop: '1rem' }}>
         Add contact
       </button>
     </form>

@@ -22,28 +22,31 @@ export const ContactList = () => {
   };
 
   return (
-    <ul>
-      {isLoading && <div>Loading...</div>}
-      {!filterContacts?.length && !error && !isLoading && (
-        <div>Not found. Try something else</div>
-      )}
-      {error && <div>{error}</div>}
+    <div style={{ marginTop: '1rem' }}>
+      <h2 style={{ marginBottom: '0.5rem' }}>Contacts</h2>
+      <ul>
+        {isLoading && <div>Loading...</div>}
+        {!filterContacts?.length && !error && !isLoading && (
+          <div>Not found. Try something else</div>
+        )}
+        {error && <div>{error}</div>}
 
-      {filterContacts.map(({ id, name, phone }) => (
-        <li key={id} style={{ marginBottom: '0.5rem' }}>
-          {name}:{' '}
-          <span>
-            <b>{phone}</b>
-          </span>
-          <button
-            style={{ marginLeft: '0.7rem', fontSize: '0.7rem' }}
-            type="button"
-            onClick={() => onDelContact(id)}
-          >
-            Delete
-          </button>
-        </li>
-      ))}
-    </ul>
+        {filterContacts.map(({ id, name, phone }) => (
+          <li key={id} style={{ marginBottom: '0.5rem' }}>
+            {name}:{' '}
+            <span>
+              <b>{phone}</b>
+            </span>
+            <button
+              style={{ marginLeft: '0.7rem', fontSize: '0.7rem' }}
+              type="button"
+              onClick={() => onDelContact(id)}
+            >
+              Delete
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
