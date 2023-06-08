@@ -58,6 +58,7 @@ export const ContactForm = () => {
         borderRadius: '0.5rem',
         marginTop: '0.5rem',
         padding: '1rem',
+        position: 'relative',
       }}
     >
       <label
@@ -97,7 +98,19 @@ export const ContactForm = () => {
           required
         />
       </label>
-      <button type="submit" style={{ padding: '0.5rem', marginTop: '1rem' }}>
+      <button
+        type="submit"
+        style={{
+          padding: '0.5rem',
+          marginTop: '1rem',
+          // width: 'max-content',
+          width: '6.3rem',
+          height: '5.8rem',
+          position: 'absolute',
+          top: '1.6rem',
+          right: '1rem',
+        }}
+      >
         Add contact
       </button>
     </form>
