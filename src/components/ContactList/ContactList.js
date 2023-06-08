@@ -32,13 +32,21 @@ export const ContactList = () => {
         {error && <div>{error}</div>}
 
         {filterContacts.map(({ id, name, phone }) => (
-          <li key={id} style={{ marginBottom: '0.5rem' }}>
-            {name}:{' '}
-            <span>
-              <b>{phone}</b>
-            </span>
+          <li
+            key={id}
+            style={{
+              marginBottom: '0.5rem',
+              width: 'max-content',
+              display: 'grid',
+              grid: 'auto-flow / 3fr 2fr 1fr',
+            }}
+          >
+            {name}: <b style={{ marginLeft: '0.3rem' }}>{phone}</b>
             <button
-              style={{ marginLeft: '0.7rem', fontSize: '0.7rem' }}
+              style={{
+                margin: '0 0.7rem',
+                fontSize: '0.7rem',
+              }}
               type="button"
               onClick={() => onDelContact(id)}
             >

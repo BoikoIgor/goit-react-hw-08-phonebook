@@ -57,7 +57,6 @@ export const ContactForm = () => {
         border: '0.1rem solid black',
         borderRadius: '0.5rem',
         marginTop: '0.5rem',
-        maxWidth: '320px',
         padding: '1rem',
       }}
     >
@@ -71,6 +70,7 @@ export const ContactForm = () => {
           name="name"
           value={name}
           onChange={e => setName(e.target.value)}
+          maxLength="20"
           // pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
@@ -84,13 +84,14 @@ export const ContactForm = () => {
           gap: '0.5rem',
         }}
       >
-        Number
+        Phone
         <input
           style={{ maxWidth: '70%' }}
           type="tel"
           name="phone"
           value={phone}
           onChange={e => setPhone(e.target.value)}
+          maxLength="12"
           // pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required

@@ -13,15 +13,12 @@ export const Filter = () => {
           flexDirection: 'column',
           gap: '0.5rem',
           marginTop: '1rem',
-          // width: '50%',
         }}
       >
         Find contact by name
         <input
           style={{
             display: 'flex',
-            // marginBottom: '0.8rem',
-            // width: '70% - 1rem',
           }}
           onChange={e => dispatch(contactsFilter(e.target.value))}
           value={filter}

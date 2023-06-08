@@ -5,6 +5,6 @@ export const Container = styled.div`
   border-radius: 0.5rem;
   align-items: center;
   max-width: fit-content;
-  margin: 0 auto;
+  margin: 1rem auto;
   padding: 1rem;
 `;
