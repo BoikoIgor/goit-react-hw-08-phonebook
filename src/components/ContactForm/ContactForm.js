@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
-import { selectContacts } from 'Redux/selectors';
-import { addContact } from '../../Redux/operations';
+import { selectContacts } from 'Redux/contacts/selectors';
+import { addContact } from '../../Redux/contacts/operations';
 import { toast } from 'react-toastify';
 
 export const ContactForm = () => {

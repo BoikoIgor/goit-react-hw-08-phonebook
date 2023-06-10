@@ -2,10 +2,10 @@ import {
   selectError,
   selectFilterContacts,
   selectIsLoading,
-} from 'Redux/selectors';
+} from 'Redux/contacts/selectors';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchContacts, deleteContact } from '../../Redux/operations';
+import { fetchContacts, deleteContact } from '../../Redux/contacts/operations';
 
 export const ContactList = () => {
   const filterContacts = useSelector(selectFilterContacts);
