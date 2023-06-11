@@ -1,4 +1,5 @@
-import { contactsFilter } from 'Redux/contacts/filterSlice';
+import { filterContact } from '../../Redux/contacts/contactsSlice';
+
 import { selectFilter } from 'Redux/contacts/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -20,7 +21,7 @@ export const Filter = () => {
           style={{
             display: 'flex',
           }}
-          onChange={e => dispatch(contactsFilter(e.target.value))}
+          onChange={e => dispatch(filterContact(e.target.value))}
           value={filter}
           type="text"
           name="filter"

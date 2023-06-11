@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
+  const [number, setNumber] = useState('');
   const dispatch = useDispatch();
   const allContacts = useSelector(selectContacts);
 
@@ -15,7 +15,7 @@ export const ContactForm = () => {
     e.preventDefault();
 
     const uniqueName = name.toLowerCase().trim();
-    const uniqueNumber = phone.toLowerCase().trim();
+    const uniqueNumber = number.toLowerCase().trim();
 
     if (
       allContacts.find(
@@ -29,21 +29,21 @@ export const ContactForm = () => {
     }
     if (
       allContacts.find(
-        ({ phone }) => phone.toLocaleLowerCase().trim() === uniqueNumber
+        ({ number }) => number.toLocaleLowerCase().trim() === uniqueNumber
       )
     ) {
       toast.warn(
-        `Please enter another number. ${phone} is already exists in your contacts `
+        `Please enter another number. ${number} is already exists in your contacts `
       );
       return;
     }
-    const id = nanoid();
+    // const id = nanoid();
     // const newContact = { name, phone, id };
     // addContact(newContact);
-    dispatch(addContact({ name, phone, id })).then(result => {
+    dispatch(addContact({ name, number })).then(result => {
       if (result.meta.requestStatus === 'fulfilled') {
         setName('');
-        setPhone('');
+        setNumber('');
         return;
       }
       toast.error(`Something went wrong. Сontact ${name} was not added`);
@@ -89,9 +89,9 @@ export const ContactForm = () => {
         <input
           style={{ maxWidth: '70%' }}
           type="tel"
-          name="phone"
-          value={phone}
-          onChange={e => setPhone(e.target.value)}
+          name="number"
+          value={number}
+          onChange={e => setNumber(e.target.value)}
           maxLength="12"
           // pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"

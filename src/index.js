@@ -19,13 +19,13 @@ const theme = {
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <BrowserRouter basename="/goit-react-hw-08-phonebook">
-        <Provider store={store}>
-          <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
+      <Provider store={store}>
+        <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
+          <BrowserRouter basename="/goit-react-hw-08-phonebook">
             <App />
-          </PersistGate>
-        </Provider>
-      </BrowserRouter>
+          </BrowserRouter>
+        </PersistGate>
+      </Provider>
     </ThemeProvider>
   </React.StrictMode>
 );
