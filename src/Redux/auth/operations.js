@@ -23,13 +23,15 @@ export const register = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const res = await axios.post('/users/signup', credentials);
+      toast.success('Successfully registered!');
       // After successful registration, add the token to the HTTP header
       setAuthHeader(res.data.token);
       return res.data;
     } catch (error) {
-      toast.warn(
-        `Please enter another mail. ${credentials.email} is already exists `
-      );
+      if (error.response && error.response.status === 400) {
+        toast.error(`Something went wrong. Try something else`);
+      }
+
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -48,6 +50,9 @@ export const logIn = createAsyncThunk(
       setAuthHeader(res.data.token);
       return res.data;
     } catch (error) {
+      if (error.response && error.response.status === 400) {
+        toast.error(`Something went wrong. Try something else`);
+      }
       return thunkAPI.rejectWithValue(error.message);
     }
   }
