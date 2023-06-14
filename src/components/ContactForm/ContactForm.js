@@ -22,7 +22,11 @@ export const ContactForm = () => {
       )
     ) {
       toast.warn(
-        `Please enter another name. ${name} is already exists in your contacts `
+        `Please enter another name. ${name} is already exists in your contacts `,
+        {
+          position: 'top-right',
+          autoClose: 2000,
+        }
       );
       return;
     }
@@ -32,7 +36,11 @@ export const ContactForm = () => {
       )
     ) {
       toast.warn(
-        `Please enter another number. ${number} is already exists in your contacts `
+        `Please enter another number. ${number} is already exists in your contacts `,
+        {
+          position: 'top-right',
+          autoClose: 2000,
+        }
       );
       return;
     }
